@@ -40,6 +40,16 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void PlaySingle()
+    {
+        SceneManager.LoadScene("SinglePlayer");
+    }
+
+    public void PlayMulti()
+    {
+        SceneManager.LoadScene("MultiPlayer");
+    }
+
     public void ExitGame()
     {
         //will exit game when app is finished

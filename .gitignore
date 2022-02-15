@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+mazebattle/Library/
+mazebattle/Temp/
+mazebattle/.vscode/
