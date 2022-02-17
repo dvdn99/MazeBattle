@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Immortalizer : MonoBehaviour
 {
-    void Start()
+    private void Awake() 
     {
         DontDestroyOnLoad(this.gameObject);
+
     }
+
 }

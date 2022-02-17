@@ -1,33 +1,38 @@
-using System.Collections;
+using System;
 using UnityEngine;
 
+    
 public class GameManager_Master : MonoBehaviour
 {
+    public static GameManager_Master current; 
+    void Awake() 
+    { 
+        if (current) 
+        { 
+            Destroy(gameObject);
+        } 
+        else 
+        { 
+            current = this;
+        }
+    }
     
-    public delegate void GameManagerEventHandler();
-    public event GameManagerEventHandler MenuToggleEvent;
-    public event GameManagerEventHandler RestartLevelEvent;
-    public event GameManagerEventHandler GoToMenuSceneEvent;
-    public event GameManagerEventHandler GameOverEvent;
+    public event Action PauseMenuEvent;
+    public event Action GoToMenuSceneEvent;
+    public event Action GameOverEvent;
 
-    public bool isGameOver;
-    public bool isMenuOn;
 
-    public void CallEventMenuToggle()
+    private bool isGameOver;
+    private bool isGamePaused;
+
+    public void CallEventPauseMenu()
     {
-        if(MenuToggleEvent != null)
+        if(PauseMenuEvent != null)
         {
-            MenuToggleEvent();
+            PauseMenuEvent();
         }
     }
 
-    public void CallEventRestartLevel()
-    {
-        if(RestartLevelEvent != null)
-        {
-            RestartLevelEvent();
-        }
-    }
 
     public void CallEventGoToMenuScene()
     {

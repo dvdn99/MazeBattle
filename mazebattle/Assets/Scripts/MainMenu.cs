@@ -7,17 +7,30 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject optionsPanel;
     public GameObject playPanel;
+    public GameObject infoPanel;
 
     private void Start() {
         mainMenuPanel.SetActive(true);
         playPanel.SetActive(false);
         optionsPanel.SetActive(false);
+        infoPanel.SetActive(false);
     }
     public void PlayGame()
     {
         mainMenuPanel.SetActive(false);
         playPanel.SetActive(true);
         optionsPanel.SetActive(false);
+    }
+
+    public void ShowInfo()
+    {
+        if(optionsPanel != null && mainMenuPanel != null && playPanel != null)
+        {
+            optionsPanel.SetActive(false);
+            mainMenuPanel.SetActive(false);
+            playPanel.SetActive(false);
+            infoPanel.SetActive(true);
+        }
     }
 
     public void OptionsPanel()
@@ -27,7 +40,21 @@ public class MainMenu : MonoBehaviour
         {
             optionsPanel.SetActive(true);
             mainMenuPanel.SetActive(false);
+            playPanel.SetActive(false);
+            infoPanel.SetActive(false);
         }
+    }
+
+    public void BackOptionPanel()
+    {
+        if(optionsPanel != null && mainMenuPanel != null && playPanel != null)
+        {
+            mainMenuPanel.SetActive(false);
+            playPanel.SetActive(false);
+            optionsPanel.SetActive(true);
+            infoPanel.SetActive(false);
+        }
+
     }
 
     public void BackMainMenu()
@@ -37,6 +64,7 @@ public class MainMenu : MonoBehaviour
             mainMenuPanel.SetActive(true);
             playPanel.SetActive(false);
             optionsPanel.SetActive(false);
+            infoPanel.SetActive(false);
         }
     }
 
@@ -54,5 +82,6 @@ public class MainMenu : MonoBehaviour
     {
         //will exit game when app is finished
         Application.Quit();
+        Debug.Log("Quit");
     }
 }

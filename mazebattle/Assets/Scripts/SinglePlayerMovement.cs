@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerOneMovement : MonoBehaviour
+public class SinglePlayerMovement : MonoBehaviour
 {
 
     public float movementSpeed = 3f;
@@ -33,6 +33,7 @@ public class PlayerOneMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other) 
     {
-        Debug.Log("Player 1");
+        Debug.Log("You Win!");
     }
+
 }

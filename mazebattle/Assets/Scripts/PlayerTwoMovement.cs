@@ -30,4 +30,9 @@ public class PlayerTwoMovement : MonoBehaviour
         //Updating player position
         rigidBody2.MovePosition(rigidBody2.position + movement * movementSpeed * Time.deltaTime);
     }
+
+    private void OnTriggerExit2D(Collider2D other) 
+    {
+        Debug.Log("Player 2");
+    }
 }

@@ -1,19 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-public class GM_PauseToggle : MonoBehaviour
+
+    public class GM_PauseToggle : MonoBehaviour
 {
     private GameManager_Master gm_master;
     private bool isPaused;
     void OnEnable()
     {
         SetInitialState();
-        gm_master.MenuToggleEvent += TogglePause;
+        gm_master.PauseMenuEvent += TogglePause;
     }
 
     void OnDisable() 
     {
-        gm_master.MenuToggleEvent -= TogglePause;
+        gm_master.PauseMenuEvent -= TogglePause;
     }
 
     void SetInitialState()
@@ -35,3 +36,4 @@ public class GM_PauseToggle : MonoBehaviour
         }
     }
 }
+
