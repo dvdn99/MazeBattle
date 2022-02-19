@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject inventoryPanel;
     public GameObject infoPanel;
 
-   
+    public Text muteButton;
+    public static bool isGameOver;
+
+    bool isMuted = false;
     private bool isPaused;
  
 
@@ -21,9 +25,11 @@ public class PauseMenu : MonoBehaviour
         inventoryPanel.SetActive(true);
         isPaused = false;
         Time.timeScale = 1;
+        isGameOver = false;
     }
 
     public void GoMain(){
+        Mute();
         GameManager_Master.current.CallEventGoToMenuScene();
     }
 
@@ -83,11 +89,26 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void Mute()
+    {
+        if(!isMuted){
+            AudioManager.Instance.Mute();
+            isMuted = !isMuted;
+            muteButton.text = "PLAY";
+        }else
+        {
+            AudioManager.Instance.ContinueMusic();
+            isMuted = !isMuted;
+            muteButton.text = "MUTE";
+        }
+        
+    }
+
     private void Update() {
-        if(Input.GetKeyDown("escape") && !isPaused){
+        if(Input.GetKeyDown("escape") && !isPaused && !isGameOver){
             isPaused = !isPaused;
             ShowPauseMenu();
-        }else if(Input.GetKeyDown("escape")){
+        }else if(Input.GetKeyDown("escape") && !isGameOver){
             isPaused = !isPaused;
             PlayGame();
         }

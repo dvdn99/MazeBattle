@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class MainMenu : MonoBehaviour
     public GameObject optionsPanel;
     public GameObject playPanel;
     public GameObject infoPanel;
+    public Text muteButton;
+
+    public bool isMuted = false;
 
     private void Start() {
         mainMenuPanel.SetActive(true);
@@ -68,14 +72,33 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void Mute()
+    {
+        if(!isMuted){
+            AudioManager.Instance.Mute();
+            isMuted = !isMuted;
+            muteButton.text = "PLAY";
+        }else
+        {
+            AudioManager.Instance.ContinueIntro();
+            isMuted = !isMuted;
+            muteButton.text = "MUTE";
+        }
+        
+    }
+
     public void PlaySingle()
     {
         SceneManager.LoadScene("SinglePlayer");
+        SinglePlayerMovement.isNotFirstGame = false;
+        AudioManager.Instance.PlayMusic();
     }
 
     public void PlayMulti()
     {
         SceneManager.LoadScene("MultiPlayer");
+        PauseMenuMulti.isNotFirstGame = false;
+        AudioManager.Instance.PlayMusic();
     }
 
     public void ExitGame()

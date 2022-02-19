@@ -4,7 +4,7 @@ using UnityEngine;
     
 public class GameManager_Master : MonoBehaviour
 {
-    public static GameManager_Master current; 
+    public static GameManager_Master current;
     void Awake() 
     { 
         if (current) 
@@ -20,10 +20,7 @@ public class GameManager_Master : MonoBehaviour
     public event Action PauseMenuEvent;
     public event Action GoToMenuSceneEvent;
     public event Action GameOverEvent;
-
-
-    private bool isGameOver;
-    private bool isGamePaused;
+    public event Action GO_MultiEvent;
 
     public void CallEventPauseMenu()
     {
@@ -46,8 +43,15 @@ public class GameManager_Master : MonoBehaviour
     {
         if(GameOverEvent != null)
         {
-            isGameOver = true;
             GameOverEvent();
+        }
+    }
+
+    public void CallEventGOMulti()
+    {
+        if(GO_MultiEvent != null)
+        {
+            GO_MultiEvent();
         }
     }
 }

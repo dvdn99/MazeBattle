@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerTwoMovement : MonoBehaviour
 {
 
     public float movementSpeed = 3f;
+    public Text textVictory;
     public Rigidbody2D rigidBody2;
+    public GameObject pauseMenu;
+
+    public static int victories;
 
     Vector2 movement;
     void Start()
@@ -12,7 +17,11 @@ public class PlayerTwoMovement : MonoBehaviour
         //initial position
         //in the center of maze
         rigidBody2.MovePosition(new Vector2(0f, 0f));
-
+        if(!PauseMenuMulti.isNotFirstGame)
+        {
+            PlayerTwoMovement.victories = 0;
+        }
+        textVictory.text = "Player 2: " + PlayerTwoMovement.victories.ToString();
     }
 
     // Update is called once per frame
@@ -34,5 +43,7 @@ public class PlayerTwoMovement : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other) 
     {
         Debug.Log("Player 2");
+        PlayerTwoMovement.victories += 1;
+        pauseMenu.GetComponent<PauseMenuMulti>().LoadNextLevel(2);
     }
 }
